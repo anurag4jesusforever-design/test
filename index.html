@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARILO - India's Largest Premium Real Estate Platform</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'arilo-gold': '#d4af37',
+                        'arilo-dark': '#1a1a1a',
+                        'arilo-light': '#f8f9fa',
+                        'arilo-accent': '#0d9488',
+                        'arilo-red': '#dc2626',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.7s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --dark-color: #1a1a1a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        .bg-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            min-height: 600px;
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .property-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .property-card:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #d4af37, #f7ef8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .search-tabs button.active {
+            color: #d4af37;
+            border-bottom: 3px solid #d4af37;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #f7ef8a);
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #1a1a1a;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            background: #d4af37;
+            color: white;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #d4af37;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #d4af37;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #d4af37; }
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: white;
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(10px); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-10px); opacity: 0; }
+        }
+        
+        .gradient-border {
+            position: relative;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(135deg, #d4af37, #f7ef8a, #0d9488);
+        }
+        
+        .gradient-border > div {
+            background: white;
+            border-radius: 13px;
+            padding: 20px;
+        }
+        
+        .pulse-gold {
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            animation: pulse-gold 2s infinite;
+        }
+        
+        @keyframes pulse-gold {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+            
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+            
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .line-clamp-2 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        
+        .city-selector {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-arilo-light">
+
+    <!-- Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="logo-text text-3xl text-arilo-dark mr-2">ARILO</span>
+                    <span class="text-xs text-gray-500 hidden sm:inline">Premium Real Estate</span>
+                </div>
+
+                <!-- City Selector -->
+                <div class="hidden md:flex items-center city-selector rounded-lg px-4 py-2 text-white">
+                    <i class="fa-solid fa-location-dot text-arilo-gold mr-2"></i>
+                    <span class="font-medium">Hyderabad</span>
+                    <i class="fa-solid fa-chevron-down ml-2 text-sm"></i>
+                </div>
+
+                <!-- Main Nav Links -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
+                    <a href="#" class="nav-link">Properties</a>
+                    <a href="#" class="nav-link">Projects</a>
+                    <a href="#" class="nav-link">Home Loans</a>
+                    <a href="#" class="nav-link">Home Interiors</a>
+                    <a href="#" class="nav-link">Advice</a>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-arilo-gold p-2 rounded-full transition duration-300">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-arilo-gold p-2 rounded-full transition duration-300">
+                        <i class="fa-regular fa-bell text-lg"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-arilo-gold p-2 rounded-full transition duration-300">
+                        <i class="fa-regular fa-user text-lg"></i>
+                    </button>
+                    <button class="bg-arilo-red text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
+                        Post Property <span class="text-xs bg-white text-arilo-red px-1 rounded ml-1">FREE</span>
+                    </button>
+                    <button class="text-gray-700 hover:text-arilo-gold p-2 rounded-full md:hidden transition duration-300">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-hero flex items-center justify-center relative">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in" data-aos="fade-up">
+                India's <span class="gradient-text">Largest</span> Real Estate Platform
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto animate-fade-in" data-aos="fade-up" data-aos-delay="200">
+                We've got you covered! From finding the perfect property to Financing!
+            </p>
+            
+            <!-- Search Tabs -->
+            <div class="flex search-tabs justify-center space-x-6 text-lg mb-8 overflow-x-auto no-scrollbar" data-aos="fade-up" data-aos-delay="400">
+                <button class="active pb-2 whitespace-nowrap transition duration-300">Flat</button>
+                <button class="pb-2 whitespace-nowrap transition duration-300">Plot</button>
+                <button class="pb-2 whitespace-nowrap transition duration-300">Villas</button>
+                <button class="pb-2 whitespace-nowrap transition duration-300">Commercial</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto animate-fade-in" data-aos="fade-up" data-aos-delay="600">
+                <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <!-- Location Input -->
+                    <div class="w-full md:w-2/5 relative">
+                        <label for="search-input" class="text-xs text-gray-500 block mb-1 text-left">Search by Project, Locality, or Builder</label>
+                        <input type="text" id="search-input" placeholder="Enter Locality / Project / Landmark" class="w-full border border-gray-300 rounded-xl p-3 pl-10 text-gray-800 focus:ring-2 focus:ring-arilo-gold focus:border-arilo-gold transition duration-300">
+                        <i class="fa-solid fa-location-dot absolute left-3 top-10 text-gray-400"></i>
+                    </div>
+
+                    <!-- Property Type -->
+                    <div class="w-full md:w-1/5">
+                        <label for="property-type" class="text-xs text-gray-500 block mb-1 text-left">Property Type</label>
+                        <select id="property-type" class="w-full border border-gray-300 rounded-xl p-3 text-gray-800 focus:ring-2 focus:ring-arilo-gold focus:border-arilo-gold transition duration-300">
+                            <option>All Residential</option>
+                            <option>Apartment</option>
+                            <option>Villa</option>
+                            <option>Plot</option>
+                            <option>Commercial</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="w-full md:w-1/5">
+                        <label for="price-range" class="text-xs text-gray-500 block mb-1 text-left">Budget</label>
+                        <select id="price-range" class="w-full border border-gray-300 rounded-xl p-3 text-gray-800 focus:ring-2 focus:ring-arilo-gold focus:border-arilo-gold transition duration-300">
+                            <option>Any Price</option>
+                            <option>Under ₹50L</option>
+                            <option>₹50L - ₹1Cr</option>
+                            <option>₹1Cr - ₹2Cr</option>
+                            <option>Above ₹2Cr</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="w-full md:w-1/5 mt-6 md:mt-0">
+                        <button class="w-full btn-primary py-3 px-6 rounded-xl font-semibold shadow-lg">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-counter" data-count="15000">0</div>
+                    <p class="text-gray-600 mt-2">Properties Listed</p>
+                </div>
+                <div class="p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-counter" data-count="2500">0</div>
+                    <p class="text-gray-600 mt-2">Happy Clients</p>
+                </div>
+                <div class="p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stats-counter" data-count="120">0</div>
+                    <p class="text-gray-600 mt-2">Cities Covered</p>
+                </div>
+                <div class="p-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stats-counter" data-count="15">0</div>
+                    <p class="text-gray-600 mt-2">Years Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Types Section -->
+    <section class="py-16 bg-arilo-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Apartments, Villas and more in Hyderabad</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Residential Apartment</h3>
+                    <p class="text-arilo-gold font-bold text-2xl">13,000+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Residential Land</h3>
+                    <p class="text-arilo-gold font-bold text-2xl">8,400+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Independent House/Villa</h3>
+                    <p class="text-arilo-gold font-bold text-2xl">5,200+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Commercial</h3>
+                    <p class="text-arilo-gold font-bold text-2xl">1,800+ Properties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Selling Projects -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Hot Selling Real Estate Projects in India</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">A handpicked collection of the country's most in-demand residential developments. These properties, from modern apartments to premium villas, offer unmatched value in top cities with ideal locations, smart amenities, and trusted builders.</p>
+            </div>
+            
+            <!-- City Tabs -->
+            <div class="flex overflow-x-auto no-scrollbar space-x-4 mb-8 pb-2" data-aos="fade-up">
+                <button class="px-4 py-2 bg-arilo-gold text-white rounded-lg font-medium whitespace-nowrap">Mumbai</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Bangalore</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Gurgaon</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Pune</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Noida</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Hyderabad</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Thane</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Navi Mumbai</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium whitespace-nowrap">Chennai</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Luxury Apartment" class="w-full h-64 object-cover">
+                        <span class="absolute top-4 left-4 bg-arilo-gold text-white text-xs font-semibold px-3 py-1 rounded-full">Featured</span>
+                        <button class="absolute top-4 right-4 text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition duration-300">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <div class="absolute bottom-4 left-4 text-white font-bold text-xl">₹ 2.75 Cr</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-arilo-dark mb-2">Luxury Sky Villa</h3>
+                        <p class="text-gray-500 mb-4">3 BHK Apartment, Bandra West, Mumbai</p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t border-gray-100 pt-4">
+                            <span><i class="fa-solid fa-bed mr-1"></i> 3 Bed</span>
+                            <span><i class="fa-solid fa-bath mr-1"></i> 3 Bath</span>
+                            <span><i class="fa-solid fa-maximize mr-1"></i> 1850 sq.ft.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2084&q=80" alt="Modern Villa" class="w-full h-64 object-cover">
+                        <span class="absolute top-4 left-4 bg-arilo-accent text-white text-xs font-semibold px-3 py-1 rounded-full">New</span>
+                        <button class="absolute top-4 right-4 text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition duration-300">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <div class="absolute bottom-4 left-4 text-white font-bold text-xl">₹ 4.2 Cr</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-arilo-dark mb-2">Seaside Paradise Villa</h3>
+                        <p class="text-gray-500 mb-4">4 BHK Villa, Alibaug, Maharashtra</p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t border-gray-100 pt-4">
+                            <span><i class="fa-solid fa-bed mr-1"></i> 4 Bed</span>
+                            <span><i class="fa-solid fa-bath mr-1"></i> 4 Bath</span>
+                            <span><i class="fa-solid fa-maximize mr-1"></i> 3200 sq.ft.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="property-card bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80" alt="Commercial Space" class="w-full h-64 object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Commercial</span>
+                        <button class="absolute top-4 right-4 text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition duration-300">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <div class="absolute bottom-4 left-4 text-white font-bold text-xl">₹ 8.5 Cr</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-arilo-dark mb-2">Premium Office Space</h3>
+                        <p class="text-gray-500 mb-4">Commercial Building, Connaught Place, Delhi</p>
+                        <div class="flex justify-between text-sm text-gray-500 border-t border-gray-100 pt-4">
+                            <span><i class="fa-solid fa-building mr-1"></i> 5 Floors</span>
+                            <span><i class="fa-solid fa-elevator mr-1"></i> 2 Lifts</span>
+                            <span><i class="fa-solid fa-maximize mr-1"></i> 8500 sq.ft.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12" data-aos="fade-up">
+                <button class="btn-secondary py-3 px-8 rounded-xl font-semibold shadow-lg">
+                    View All Projects <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Handpicked Projects -->
+    <section class="py-20 bg-arilo-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Handpicked Projects</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Featured projects in Hyderabad with exclusive offers and premium amenities</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Bhashyam Cyber County 5" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 left-2 bg-arilo-gold text-white text-xs font-semibold px-2 py-0.5 rounded-full">Featured</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-arilo-dark mb-1">Bhashyam Cyber County 5</h3>
+                        <p class="text-gray-500 text-sm mb-2">Land, Adibatla, Hyderabad</p>
+                        <p class="text-arilo-gold font-semibold">₹ 43.43 Lacs - 1.57 Cr</p>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="S2 Silicon City" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">New</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-arilo-dark mb-1">S2 Silicon City</h3>
+                        <p class="text-gray-500 text-sm mb-2">Land, Shad nagar, Hyderabad</p>
+                        <p class="text-arilo-gold font-semibold">₹ 31.5 - 63 Lacs</p>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="CR Chevella Green Rich" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 left-2 bg-blue-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">Upcoming</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-arilo-dark mb-1">CR Chevella Green Rich</h3>
+                        <p class="text-gray-500 text-sm mb-2">Land, Chevella, Hyderabad</p>
+                        <p class="text-arilo-gold font-semibold">₹ 16.95 - 50.84 Lacs</p>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2084&q=80" alt="Speedx Hampton Palms" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 left-2 bg-purple-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">Premium</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-arilo-dark mb-1">Speedx Hampton Palms</h3>
+                        <p class="text-gray-500 text-sm mb-2">Land, Rudraram, Hyderabad</p>
+                        <p class="text-arilo-gold font-semibold">₹ 22.32 - 54 Lacs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Tools Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark">Use Popular Tools</h2>
+                <a href="#" class="text-arilo-accent font-medium hover:underline">View all Insights</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Tool 1 -->
+                <div class="bg-white p-6 rounded-xl card-shadow flex flex-col items-center text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Budget Calculator</h3>
+                    <p class="text-sm text-gray-500 mt-2">Check your affordability range for buying home</p>
+                </div>
+                
+                <!-- Tool 2 -->
+                <div class="bg-white p-6 rounded-xl card-shadow flex flex-col items-center text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">EMI Calculator</h3>
+                    <p class="text-sm text-gray-500 mt-2">Calculate your home loan EMI</p>
+                </div>
+                
+                <!-- Tool 3 -->
+                <div class="bg-white p-6 rounded-xl card-shadow flex flex-col items-center text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-house-chimney-crack"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Loan Eligibility</h3>
+                    <p class="text-sm text-gray-500 mt-2">See what you can borrow for your home</p>
+                </div>
+                
+                <!-- Tool 4 -->
+                <div class="bg-white p-6 rounded-xl card-shadow flex flex-col items-center text-center card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Area Converter</h3>
+                    <p class="text-sm text-gray-500 mt-2">Convert one area into any other easily</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BHK Options -->
+    <section class="py-16 bg-arilo-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">BHK Choice in Mind?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Browse by number of bedrooms in the house</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">1 RK/1 BHK</h3>
+                    <p class="text-arilo-gold font-bold text-lg">530+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">2 BHK</h3>
+                    <p class="text-arilo-gold font-bold text-lg">6,300+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">3 BHK</h3>
+                    <p class="text-arilo-gold font-bold text-lg">8,400+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">4 BHK</h3>
+                    <p class="text-arilo-gold font-bold text-lg">3,200+ Properties</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">4+ BHK</h3>
+                    <p class="text-arilo-gold font-bold text-lg">1,100+ Properties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Advertisers -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Properties Posted By</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose type of advertiser and browse your choice of listing</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-arilo-light rounded-xl p-8 text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Owner</h3>
+                    <p class="text-arilo-gold font-bold text-lg">17,000+ Properties</p>
+                </div>
+                <div class="bg-arilo-light rounded-xl p-8 text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Dealer</h3>
+                    <p class="text-arilo-gold font-bold text-lg">14,000+ Properties</p>
+                </div>
+                <div class="bg-arilo-light rounded-xl p-8 text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-hard-hat"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-arilo-dark mb-2">Builder</h3>
+                    <p class="text-arilo-gold font-bold text-lg">360+ Properties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Articles -->
+    <section class="py-20 bg-arilo-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Top Articles on Home Buying</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Read realty news, guides & articles</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Article 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Article Image" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Skywalk to link Hyderabad metro stations</h3>
+                        <p class="text-sm text-gray-500">Mar 04, 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Article 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Article Image" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Hyderabad Purple Line: Latest updates</h3>
+                        <p class="text-sm text-gray-500">Feb 24, 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Article 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Article Image" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Telangana plans two new IT parks in Hyderabad</h3>
+                        <p class="text-sm text-gray-500">Jan 30, 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Article 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80" alt="Article Image" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-2">Ultra-luxury home sales rise in Hyderabad</h3>
+                        <p class="text-sm text-gray-500">Jan 10, 2025</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8" data-aos="fade-up">
+                <a href="#" class="text-arilo-accent font-medium hover:underline">Read realty news, guides & articles <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Cities -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-arilo-dark mb-4">Explore Real Estate in Popular Indian Cities</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Delhi / NCR</p>
+                    <p class="text-sm text-gray-500">176,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Mumbai</p>
+                    <p class="text-sm text-gray-500">40,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Bangalore</p>
+                    <p class="text-sm text-gray-500">49,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Hyderabad</p>
+                    <p class="text-sm text-gray-500">28,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Pune</p>
+                    <p class="text-sm text-gray-500">38,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Kolkata</p>
+                    <p class="text-sm text-gray-500">33,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="700">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Chennai</p>
+                    <p class="text-sm text-gray-500">37,000+ Properties</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="800">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <i class="fa-solid fa-city text-arilo-gold text-2xl"></i>
+                    </div>
+                    <p class="font-medium text-gray-800">Ahmedabad</p>
+                    <p class="text-sm text-gray-500">24,000+ Properties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-arilo-gold to-arilo-accent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-3xl mx-auto" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Sell or Rent Faster at the Right Price!</h2>
+                <p class="text-xl mb-10">Your perfect buyer is waiting, list your property now</p>
+                <button class="btn-secondary py-3 px-8 rounded-xl font-semibold shadow-lg text-lg">
+                    Post Property, It's FREE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-arilo-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="logo-text text-2xl mb-4">ARILO</h3>
+                    <p class="text-gray-400 mb-4">India's largest premium real estate platform with comprehensive services for buyers, sellers, and investors.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Properties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Projects</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Home Loans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Home Interiors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Property Types</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Apartments</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Villas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Plots</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Commercial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Luxury Homes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-arilo-gold"></i>
+                            <span>123 Premium Tower, Bandra Kurla Complex, Mumbai</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone mr-3 text-arilo-gold"></i>
+                            <span>Toll Free - 1800 41 99099</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-clock mr-3 text-arilo-gold"></i>
+                            <span>9:30 AM to 6:30 PM (Mon-Sun)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope mr-3 text-arilo-gold"></i>
+                            <span>info@arilo.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 ARILO Premium Real Estate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Stats Counter Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stats-counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText;
+                    
+                    const inc = target / speed;
+                    
+                    if(count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+                
+                updateCount();
+            });
+            
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.search-tabs button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    e.target.classList.add('active');
+                });
+            });
+            
+            // City tabs functionality
+            const cityTabs = document.querySelectorAll('.bg-gray-200');
+            cityTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    cityTabs.forEach(t => {
+                        t.classList.remove('bg-arilo-gold', 'text-white');
+                        t.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    e.target.classList.remove('bg-gray-200', 'text-gray-700');
+                    e.target.classList.add('bg-arilo-gold', 'text-white');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
